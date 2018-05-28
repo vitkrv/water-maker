@@ -26,7 +26,9 @@
     "pree2e:protractor": "wait-on http-get://localhost:4200/ && protractor ./protractor.conf.js",
     "e2e": "npm-run-all -p -r pree2e:build pree2e:protractor"
   },
-  "dependencies": {},
+  "dependencies": {
+    "sharp": "0.20.2"
+  },
   "devDependencies": {
     "@angular/cli": "1.7.4",
     "@angular/common": "5.2.9",
@@ -45,12 +47,14 @@
     "@types/jasmine": "2.8.6",
     "@types/jasminewd2": "2.0.3",
     "@types/node": "7.0.7",
+    "@types/sharp": "0.17.8",
     "codelyzer": "4.2.1",
     "core-js": "2.5.5",
     "cross-env": "5.1.4",
     "dotenv": "5.0.1",
     "electron": "1.8.4",
     "electron-builder": "20.8.1",
+    "electron-rebuild": "1.7.3",
     "electron-reload": "1.2.2",
     "fs-extra": "5.0.0",
     "jasmine-core": "2.99.1",
