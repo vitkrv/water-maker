@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 import { AppRoutingModule } from './app-routing.module';
 
 // NG Translate
@@ -35,6 +37,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    NgbModule.forRoot(),
     AppRoutingModule,
     TranslateModule.forRoot({
       loader: {

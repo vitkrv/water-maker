@@ -16,8 +16,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    // const image = this.electronService.sharp('D:\\test.jpg');
-    const image = this.electronService.sharp('D:\\LUDUS_icon.jpg');
+    const image = this.electronService.sharp('D:\\test.jpg');
+    // const image = this.electronService.sharp('D:\\LUDUS_icon.jpg');
 
     image.metadata()
       .then(data => {

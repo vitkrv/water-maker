@@ -27,6 +27,8 @@
     "e2e": "npm-run-all -p -r pree2e:build pree2e:protractor"
   },
   "dependencies": {
+    "@ng-bootstrap/ng-bootstrap": "2.0.0",
+    "bootstrap": "4.1.1",
     "sharp": "0.20.2"
   },
   "devDependencies": {
