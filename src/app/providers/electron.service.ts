@@ -6,6 +6,7 @@ import * as childProcess from 'child_process';
 import * as fs from 'fs';
 import * as sharp from 'sharp';
 import * as buffer from 'buffer';
+import * as path from 'path';
 
 @Injectable()
 export class ElectronService {
@@ -15,6 +16,7 @@ export class ElectronService {
   remote: typeof remote;
   childProcess: typeof childProcess;
   fs: typeof fs;
+  path: typeof path;
   bufferNodeJS: typeof buffer;
 
   sharp: typeof sharp;
@@ -30,6 +32,7 @@ export class ElectronService {
       this.fs = window.require('fs');
       this.sharp = window.require('sharp');
       this.bufferNodeJS = window.require('buffer');
+      this.path = window.require('path');
     }
   }
 
