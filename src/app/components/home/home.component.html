@@ -12,9 +12,10 @@
 
   <div class="row" *ngIf="images.length">
     <div class="form-group w-100">
-      <input type="text" class="form-control" [ngModel]="folder + '\\watermarked\\'" disabled>
+      <input type="text" class="form-control" [ngModel]="folder + '\\watermarked\\'" readonly (click)="openFolder(folder + '\\watermarked\\')">
       <input type="text" class="form-control" [(ngModel)]="watermark" placeholder="Watermark value">
-      <input type="button" class="btn btn-info" value="Add watermark" (click)="submit()">
+      <input type="button" class="btn btn-info" value="Add watermark" [disabled]="isProcessing" (click)="submit()">
+      <span>{{processedItems + ' / ' + images.length}}</span>
     </div>
   </div>
 

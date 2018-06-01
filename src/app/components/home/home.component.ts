@@ -13,6 +13,9 @@ export class HomeComponent implements OnInit {
   private _sharp;
   private _buffer;
 
+  isProcessing: boolean;
+  processedItems: number;
+
   watermark: string;
   folder: string;
   images: any[];
@@ -24,6 +27,8 @@ export class HomeComponent implements OnInit {
 
     this.images = [];
     this.queue = [];
+
+    this.processedItems = 0;
   }
 
   ngOnInit() {
@@ -55,10 +60,17 @@ export class HomeComponent implements OnInit {
     console.log(images);
   }
 
+  openFolder(path) {
+    this.electronService.childProcess.exec(`start "" "${path}"`);
+  }
+
   submit() {
     const options = new WatermarkOptions();
     options.text = this.watermark || 'Watermark';
     options.outputPath = '\\watermarked\\';
+
+    this.isProcessing = true;
+    this.processedItems = 0;
 
     if (!this.electronService.fs.existsSync(this.folder + options.outputPath)) {
       this.electronService.fs.mkdirSync(this.folder + options.outputPath);
@@ -92,10 +104,6 @@ export class HomeComponent implements OnInit {
           );
 
           this.pushToQueue(image, roundedCorners, this.electronService.path.join(this.folder, options.outputPath, filename));
-
-          /*image
-            .overlayWith(roundedCorners, {gravity: this._sharp.gravity.center})
-            .toFile(this.electronService.path.join(this.folder, options.outputPath, filename));*/
         }
       );
   }
@@ -109,9 +117,17 @@ export class HomeComponent implements OnInit {
   private runSerial() {
     let result = Promise.resolve();
     this.queue.forEach(task => {
-      result = result.then(() => task()).then(() => console.log(123123));
+      result = result.then(() => task()).then(() => this.processedItems++);
     });
-    result.then(() => this.queue = []);
+
+    result.then(() => {
+      this.queue = [];
+      this.isProcessing = false;
+    }).catch(() => {
+      this.queue = [];
+      this.isProcessing = false;
+    });
+
     return result;
   }
 }
