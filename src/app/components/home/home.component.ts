@@ -117,7 +117,9 @@ export class HomeComponent implements OnInit {
   private runSerial() {
     let result = Promise.resolve();
     this.queue.forEach(task => {
-      result = result.then(() => task()).then(() => this.processedItems++);
+      result = result.then(() => task()).then(() => {
+        this.processedItems++;
+      });
     });
 
     result.then(() => {
