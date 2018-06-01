@@ -5,6 +5,7 @@ import {ipcRenderer, remote, webFrame} from 'electron';
 import * as childProcess from 'child_process';
 import * as fs from 'fs';
 import * as sharp from 'sharp';
+import * as buffer from 'buffer';
 
 @Injectable()
 export class ElectronService {
@@ -14,6 +15,7 @@ export class ElectronService {
   remote: typeof remote;
   childProcess: typeof childProcess;
   fs: typeof fs;
+  bufferNodeJS: typeof buffer;
 
   sharp: typeof sharp;
 
@@ -27,7 +29,7 @@ export class ElectronService {
       this.childProcess = window.require('child_process');
       this.fs = window.require('fs');
       this.sharp = window.require('sharp');
-      console.log(this.sharp);
+      this.bufferNodeJS = window.require('buffer');
     }
   }
 
