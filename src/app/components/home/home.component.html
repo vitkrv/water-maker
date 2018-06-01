@@ -1,3 +1,28 @@
 <div class="container">
-  <input class="form-control form-control-lg" type="text" placeholder=".form-control-lg">
+  <div class="row">
+    <div class="input-group my-3">
+      <div class="custom-file">
+        <input type="file" webkitdirectory
+               class="custom-file-input" id="inputFileDirectory"
+               (change)="onFileChange($event)">
+        <label class="custom-file-label" for="inputFileDirectory">{{folder || 'Select folder'}}</label>
+      </div>
+    </div>
+  </div>
+
+  <h2 *ngIf="images.length">Images</h2>
+
+  <div class="row">
+
+    <ng-container *ngFor="let image of images">
+      <div class="card wm-card m-1">
+        <img class="card-img-top" [src]="'file://' + folder + image">
+        <div class="card-body p-1">
+          <p class="card-text text-center text-dark">{{image}}</p>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+
 </div>

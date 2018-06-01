@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ElectronService} from '../../providers/electron.service';
 
+const IMAGE_REGEXP = /\.jpg$/;
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -10,9 +12,14 @@ export class HomeComponent implements OnInit {
   private _sharp;
   private _buffer;
 
+  folder: string;
+  images: any[];
+
   constructor(private electronService: ElectronService) {
     this._sharp = this.electronService.sharp;
     this._buffer = this.electronService.bufferNodeJS;
+
+    this.images = [];
   }
 
   ngOnInit() {
@@ -46,4 +53,25 @@ export class HomeComponent implements OnInit {
       });
   }
 
+  onFileChange($event) {
+    console.log($event);
+    const element = <HTMLSelectElement> event.target;
+    if (!element || !element.files || !element.files[0]) {
+      this.folder = '';
+      this.images = [];
+      return;
+    }
+    this.folder = $event.target.files[0].path;
+    this.loadFiles();
+  }
+
+  private loadFiles() {
+    const filenames = this.electronService.fs.readdirSync(this.folder);
+
+    console.log(filenames);
+    const images = filenames.filter(el => IMAGE_REGEXP.test(el));
+
+    this.images = images;
+    console.log(images);
+  }
 }
