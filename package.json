@@ -9,6 +9,8 @@
   "main": "main.js",
   "private": true,
   "scripts": {
+    "rebuild-unix": "./node_modules/.bin/electron-rebuild",
+    "rebuild-win": "./node_modules/.bin/electron-rebuild.cmd",
     "postinstall": "npx electron-builder install-app-deps",
     "ng": "ng",
     "start": "node hooks/environments/set_profile.js && npm-run-all -p ng:serve electron:serve",
@@ -28,6 +30,7 @@
   },
   "dependencies": {
     "@ng-bootstrap/ng-bootstrap": "2.0.0",
+    "font-manager": "0.3.0",
     "sharp": "0.20.2"
   },
   "devDependencies": {

@@ -15,7 +15,7 @@
       <input type="text" class="form-control" [ngModel]="folder + '\\watermarked\\'" readonly (click)="openFolder(folder + '\\watermarked\\')">
       <input type="text" class="form-control" [(ngModel)]="watermark" placeholder="Watermark value">
       <input type="button" class="btn btn-info" value="Add watermark" [disabled]="isProcessing" (click)="submit()">
-      <span>{{processedItems + ' / ' + images.length}}</span>
+      <span>{{processedItems + ' / ' + totalItems}}</span>
     </div>
   </div>
 

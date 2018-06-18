@@ -7,6 +7,7 @@ import * as fs from 'fs';
 import * as sharp from 'sharp';
 import * as buffer from 'buffer';
 import * as path from 'path';
+import {FontManager} from '../models/font.model';
 
 @Injectable()
 export class ElectronService {
@@ -20,6 +21,7 @@ export class ElectronService {
   bufferNodeJS: typeof buffer;
 
   sharp: typeof sharp;
+  fontManager: FontManager;
 
   constructor() {
     // Conditional imports
@@ -33,6 +35,7 @@ export class ElectronService {
       this.sharp = window.require('sharp');
       this.bufferNodeJS = window.require('buffer');
       this.path = window.require('path');
+      this.fontManager = window.require('font-manager');
     }
   }
 
